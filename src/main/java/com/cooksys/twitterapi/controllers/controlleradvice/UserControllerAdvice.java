@@ -4,4 +4,5 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 
 @ControllerAdvice(basePackages = {"com.cooksys.twitterapi.controllers"})
 public class UserControllerAdvice {
+
 }

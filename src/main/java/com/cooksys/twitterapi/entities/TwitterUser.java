@@ -2,6 +2,7 @@ package com.cooksys.twitterapi.entities;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.apache.catalina.User;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -18,7 +19,8 @@ public class TwitterUser {
 
     private Timestamp joined;
 
-    private Boolean deleted;
+    @Column(nullable = false)
+    private Boolean deleted = false;
 
     @Embedded
     private Profile profile;
@@ -26,21 +28,20 @@ public class TwitterUser {
     @Embedded
     private Credentials credentials;
 
-    @OneToMany (mappedBy = "twitterUser", cascade = {CascadeType.ALL})
+    @OneToMany (mappedBy = "author", cascade = {CascadeType.ALL})
     private List<Tweet> tweets;
 
-//    @OneToMany (mappedBy = "user_likes")
-    // Currently don't have a user_likes table, so using Integer for now.
-    private List<Integer> user_likes;
+    @ManyToMany(mappedBy = "user_likes")
+    private List<Tweet> user_liked;
 
-//    @OneToMany (mappedBy = "user_mentions")
-    private List<TwitterUser> user_mentions;
+    @ManyToMany(mappedBy = "user_mentions")
+    private List<Tweet> user_mentioned;
 
-//    @OneToMany (mappedBy = "follower_id")
-    private List<Integer> followers;
+    @ManyToMany
+    private List<TwitterUser> followers;
 
-//    @OneToMany (mappedBy = "twitterUser")
-    private List<Integer> following;
+    @ManyToMany
+    private List<TwitterUser> following;
 
 
 }
