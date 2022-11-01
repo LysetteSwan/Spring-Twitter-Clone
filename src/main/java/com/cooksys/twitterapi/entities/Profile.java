@@ -1,13 +1,15 @@
-package com.cooksys.twitterapi.dtos;
+package com.cooksys.twitterapi.entities;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
 
+@Embeddable
 @NoArgsConstructor
 @Data
-public class ProfileDto {
+public class Profile {
 
     private String firstName;
 
@@ -17,4 +19,5 @@ public class ProfileDto {
     private String email;
 
     private String phone;
+
 }
