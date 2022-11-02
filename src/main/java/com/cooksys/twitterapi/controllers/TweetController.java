@@ -11,5 +11,5 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/tweet")
 public class TweetController {
 
-    private final TweetService tweetService;
+//    private final TweetService tweetService;
 }

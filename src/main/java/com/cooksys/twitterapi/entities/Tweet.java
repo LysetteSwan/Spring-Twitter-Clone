@@ -18,6 +18,7 @@ public class Tweet {
     private Long id;
 
     @CreationTimestamp
+    @Column(nullable = false)
     private Timestamp posted;
 
     @Column(nullable = false)
@@ -26,38 +27,35 @@ public class Tweet {
     private String content;
 
     @ManyToOne
-    @JoinColumn
     private TwitterUser author;
 
     @ManyToMany
-    @JoinTable
+    @JoinTable(name = "tweet_hashtags", joinColumns = @JoinColumn(name = "tweet_id"), inverseJoinColumns = @JoinColumn(name = "hashtag_id"))
     private List<Hashtag> hashtags;
 
     @ManyToOne
-    @JoinColumn
     private Tweet inReplyTo;
 
     @OneToMany(mappedBy = "inReplyTo")
     private List<Tweet> replies;
 
     @ManyToOne
-    @JoinColumn
     private Tweet repostOf;
 
     @OneToMany(mappedBy = "repostOf")
     private List<Tweet> reposts;
 
-    @ManyToOne
-    @JoinColumn(name = "user_table_id")
-    private TwitterUser twitter_user;
+//    @ManyToOne
+//    @JoinColumn(name = "user_table_id")
+//    private TwitterUser twitterUser;
+
+    @ManyToMany (mappedBy = "userLiked")
+    private List<TwitterUser> userLikes;
 
     @ManyToMany
-    @JoinTable
-    private List<TwitterUser> user_likes;
-
-    @ManyToMany
-    @JoinTable
-    private List<TwitterUser> user_mentions;
+    @JoinTable(name = "user_mentions", joinColumns = @JoinColumn(name = "tweet_id"), inverseJoinColumns = @JoinColumn(name = "user_id")) // Will need to put stuff in parentheses in table i.e name for table, join column and inverse join column for tweet_id and user_id
+    // for user entity will need to incorporate all of that as well.
+    private List<TwitterUser> userMentions;
 
 
 

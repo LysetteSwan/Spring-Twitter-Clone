@@ -29,7 +29,7 @@ public class Hashtag {
     @Column(nullable = false)
     private Timestamp lastUsed;
 
-    @OneToMany (mappedBy = "hashtag", cascade = {CascadeType.ALL})
-    private List<Hashtag> tweet_hashtags;
+    @ManyToMany (mappedBy = "hashtags", cascade = {CascadeType.ALL})
+    private List<Tweet> tweets;
 
 }

@@ -11,7 +11,6 @@ import javax.persistence.Embeddable;
 @Data
 public class Credentials {
 
-
     @Column(unique = true, nullable = false)
     private String username;
 
