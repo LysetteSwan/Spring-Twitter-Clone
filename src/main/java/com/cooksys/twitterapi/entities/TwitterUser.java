@@ -1,10 +1,11 @@
 package com.cooksys.twitterapi.entities;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.apache.catalina.User;
-import org.hibernate.annotations.CreationTimestamp;
 
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+//import org.springframework.boot.autoconfigure.ldap.embedded.EmbeddedLdapProperties.Credential;
+//import com.cooksys.twitterapi.entities.Credentials;
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
@@ -45,7 +46,7 @@ public class TwitterUser {
     private List<TwitterUser> followers;
 
     @ManyToMany
-    @JoinTable(name = "followers_following") // need to name table i.e explicitly name it followers_following
+    @JoinTable(name = "followers_following") 
     private List<TwitterUser> following;
 
 

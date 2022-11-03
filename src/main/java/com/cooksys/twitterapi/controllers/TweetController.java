@@ -6,17 +6,14 @@ import com.cooksys.twitterapi.dtos.ContextDto;
 import com.cooksys.twitterapi.dtos.TweetResponseDto;
 import com.cooksys.twitterapi.dtos.UserResponseDto;
 import com.cooksys.twitterapi.services.TweetService;
-import org.springframework.boot.autoconfigure.ldap.embedded.EmbeddedLdapProperties.Credential;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import lombok.RequiredArgsConstructor;
-
+import com.cooksys.twitterapi.entities.Credentials;
 import java.util.List;
-
-import org.springframework.boot.autoconfigure.ldap.embedded.EmbeddedLdapProperties.Credential;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -53,7 +50,7 @@ public class TweetController {
     	return tweetService.getTweet(id);
     }
    
-   @GetMapping 
+   @GetMapping // endpoint #13
    public List<TweetResponseDto> getCurretTweets() {
      return tweetService.getCurrentTweets();
    }
@@ -70,13 +67,13 @@ public class TweetController {
    
    @PostMapping("/{id}/repost")
    //@ResponseStatus(HttpStatus.CREATED)
-   public TweetResponseDto repostTweetById(@PathVariable Long id, @RequestBody Credential credential ) {
-	   return tweetService.repostTweetById(id, credential);
+   public TweetResponseDto repostTweetById(@PathVariable Long id, @RequestBody Credentials credentials ) {
+	   return tweetService.repostTweetById(id, credentials);
    }
    
-   @DeleteMapping("/{id}")
-   public TweetResponseDto deleteTweetById(@PathVariable Long id, @RequestBody Credential credential) {
-	   return tweetService.deleteTweetbyId(id, credential);
+   @DeleteMapping("/{id}") //endpoint #10 
+   public TweetResponseDto deleteTweetById(@PathVariable Long id, @RequestBody Credentials credentials) {
+	   return tweetService.deleteTweetbyId(id, credentials);
    }
 
     @GetMapping("/{id}/replies") // Endpoint #3
