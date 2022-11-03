@@ -22,6 +22,8 @@ public interface TweetService {
 	ResponseEntity<List<TweetResponseDto>> getTweet(Long id);
 
 	List<TweetResponseDto> getAllTweets();
+	
+	List<TweetResponseDto> getCurrentTweets();
 
 	List<UserResponseDto> getMentionsById(Long id);
 
