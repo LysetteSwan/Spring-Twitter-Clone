@@ -1,22 +1,17 @@
 package com.cooksys.twitterapi.controllers;
 
-
-<<<<<<< HEAD
 import java.util.List;
 
+import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-=======
+
 import com.cooksys.twitterapi.dtos.ContextDto;
 import com.cooksys.twitterapi.dtos.TweetResponseDto;
 import com.cooksys.twitterapi.dtos.UserResponseDto;
 import com.cooksys.twitterapi.services.TweetService;
-import lombok.RequiredArgsConstructor;
-
-import java.util.List;
 
 import org.springframework.boot.autoconfigure.ldap.embedded.EmbeddedLdapProperties.Credential;
 import org.springframework.web.bind.annotation.DeleteMapping;
->>>>>>> 83b7e85584727f639f8d569819bcf8bad2d886f9
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,19 +20,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cooksys.twitterapi.dtos.TweetRequestDto;
-import com.cooksys.twitterapi.dtos.TweetResponseDto;
-import com.cooksys.twitterapi.dtos.UserResponseDto;
-import com.cooksys.twitterapi.services.TweetService;
-
-import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequiredArgsConstructor
-@RequestMapping("/tweet")
+@AllArgsConstructor
+@RequestMapping("/tweets")
 public class TweetController {
 
-<<<<<<< HEAD
-    private final TweetService tweetService;
+    private TweetService tweetService;
     
     @GetMapping("/{id}/reposts")
     public ResponseEntity<List<TweetResponseDto>> getReposts(@PathVariable Long id){
@@ -58,10 +47,6 @@ public class TweetController {
     public ResponseEntity<List<TweetResponseDto>> getTweet(@PathVariable Long id){
     	return tweetService.getTweet(id);
     }
-    
-    
-=======
-   private final TweetService tweetService;
    
    @GetMapping 
    public List<TweetResponseDto> getAllTweets() {
@@ -72,7 +57,6 @@ public class TweetController {
    public List<UserResponseDto>getMentionsById(@PathVariable Long id){
 	   return tweetService.getMentionsById(id);
    }
-   
    
    @GetMapping("/{id}/context")
    public ContextDto getContextById(@PathVariable Long id){
@@ -89,6 +73,10 @@ public class TweetController {
    public TweetResponseDto deleteTweetById(@PathVariable Long id, @RequestBody Credential credential) {
 	   return tweetService.deleteTweetbyId(id, credential);
    }
-   
->>>>>>> 83b7e85584727f639f8d569819bcf8bad2d886f9
+
+    @GetMapping("/{id}/replies") // Endpoint #3
+    public ResponseEntity<List<TweetResponseDto>> getRepliesOfTweet(@PathVariable Long id) {
+        return tweetService.getTweetReplies(id);
+    }
+
 }
