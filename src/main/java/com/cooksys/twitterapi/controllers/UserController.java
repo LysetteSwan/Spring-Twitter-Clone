@@ -3,6 +3,7 @@ package com.cooksys.twitterapi.controllers;
 
 import java.util.List;
 
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,11 +17,11 @@ import com.cooksys.twitterapi.services.UserService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequiredArgsConstructor
+@AllArgsConstructor
 @RequestMapping("/user")
 public class UserController {
 
-    private final UserService userService;
+    private UserService userService;
 //    private final TweetService tweetService;
     
     @GetMapping("/@{username}/followers")

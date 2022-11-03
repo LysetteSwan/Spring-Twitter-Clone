@@ -1,8 +1,12 @@
 package com.cooksys.twitterapi.services.impl;
 
 import java.util.List;
+import java.util.Optional;
 
+import com.cooksys.twitterapi.dtos.TweetRequestDto;
 import org.springframework.boot.autoconfigure.ldap.embedded.EmbeddedLdapProperties.Credential;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.cooksys.twitterapi.dtos.ContextDto;
@@ -17,11 +21,40 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-
 public class TweetServiceImpl implements TweetService {
 
 	private final TweetRepository tweetRepository;
 	private final TweetMapper tweetMapper;
+
+	private Tweet checkForTweet (Long id) {
+		Optional<Tweet> findIfTweetExists = tweetRepository. findByIdAndDeletedFalse(id);
+
+		if (!findIfTweetExists.isPresent()) {
+			throw new IllegalArgumentException("The tweet does not exist");
+		}
+
+		return findIfTweetExists.get();
+	}
+
+	@Override
+	public ResponseEntity<List<TweetResponseDto>> getReposts(Long id) {
+		return null;
+	}
+
+	@Override
+	public ResponseEntity<List<UserResponseDto>> getLikes(Long id) {
+		return null;
+	}
+
+	@Override
+	public ResponseEntity<List<TweetResponseDto>> replyTweet(TweetRequestDto tweet, Long id) {
+		return null;
+	}
+
+	@Override
+	public ResponseEntity<List<TweetResponseDto>> getTweet(Long id) {
+		return null;
+	}
 
 	@Override
 	public List<TweetResponseDto> getAllTweets() {
@@ -59,6 +92,17 @@ public class TweetServiceImpl implements TweetService {
 	public TweetResponseDto deleteTweetbyId(Long id, Credential credential) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override // Logic for Endpoint #3
+	public ResponseEntity<List<TweetResponseDto>> getTweetReplies(Long id) {
+		Tweet tweetBeingRepliedTo = checkForTweet(id);
+
+		List<Tweet> replies = tweetRepository.findByInReplyToAndDeletedFalse(tweetBeingRepliedTo);
+
+		List<TweetResponseDto> response = tweetMapper.entitiesToDtos(replies);
+
+		return new ResponseEntity<>(response, HttpStatus.I_AM_A_TEAPOT);
 	}
 
 }

@@ -2,6 +2,8 @@ package com.cooksys.twitterapi.controllers;
 
 import java.util.List;
 
+import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,18 +14,19 @@ import com.cooksys.twitterapi.services.HashtagService;
 
 import lombok.RequiredArgsConstructor;
 
-@RestController
-@RequiredArgsConstructor
+@AllArgsConstructor
 @RequestMapping("/tags")
 public class HashtagController {
 
-    private final HashtagService hashtagService;
-    
-    
+
+    private HashtagService hashtagService;
+
+
+
     @GetMapping("/{label}")
     public List<TweetResponseDto> getTweetByHashTag(@PathVariable String label){
     return hashtagService.getTweetByHashTag(label);
-    
+
     }
-    
+
 }
