@@ -2,6 +2,7 @@ package com.cooksys.twitterapi.services.impl;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import com.cooksys.twitterapi.dtos.TweetRequestDto;
 import org.springframework.boot.autoconfigure.ldap.embedded.EmbeddedLdapProperties.Credential;
@@ -57,8 +58,10 @@ public class TweetServiceImpl implements TweetService {
 	}
 
 	@Override
-	public List<TweetResponseDto> getAllTweets() {
-		return null;
+	public List<TweetResponseDto> getCurrentTweets() {
+		return tweetMapper.entitiesToDtos(
+				tweetRepository.findAll().stream().filter(tweet -> !tweet.getDeleted()).collect(Collectors.toList()));
+	};
 
 //	List<Tweet> allTweets = tweetRepository.findAll();
 //	List<Tweet> activeTweets = new List<Tweet>();
@@ -69,7 +72,6 @@ public class TweetServiceImpl implements TweetService {
 //	}
 //	return tweetMapper.entitiesToDtos(activeTweets);	
 //		
-	}
 
 	@Override
 	public List<UserResponseDto> getMentionsById(Long id) {

@@ -57,6 +57,11 @@ public class Tweet {
     // for user entity will need to incorporate all of that as well.
     private List<TwitterUser> userMentions;
 
+	//public boolean isDeleted() {
+		// TODO Auto-generated method stub
+	//	return false;
+	//}
+
 
 
 }
