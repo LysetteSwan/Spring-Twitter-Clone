@@ -14,11 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import lombok.RequiredArgsConstructor;
 import com.cooksys.twitterapi.entities.Credentials;
 import java.util.List;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.cooksys.twitterapi.dtos.TweetRequestDto;
@@ -45,27 +40,29 @@ public class TweetController {
     	return tweetService.replyTweet(tweet, id);
     }
     
+
     @GetMapping("/{id}")
-    public ResponseEntity<List<TweetResponseDto>> getTweet(@PathVariable Long id){
-    	return tweetService.getTweet(id);
+    public TweetResponseDto getTweetById(@PathVariable Long id) {
+        return tweetService.getTweetById(id);
     }
+    
    
    @GetMapping // endpoint #13
    public List<TweetResponseDto> getCurretTweets() {
      return tweetService.getCurrentTweets();
    }
    
-   @GetMapping("/{id}/mentions")
+   @GetMapping("/{id}/mentions") //endpoint #1
    public List<UserResponseDto>getMentionsById(@PathVariable Long id){
 	   return tweetService.getMentionsById(id);
    }
    
-   @GetMapping("/{id}/context")
+   @GetMapping("/{id}/context")//endpoint 4 
    public ContextDto getContextById(@PathVariable Long id){
-	   return tweetService.getContextById(id);
+	   return tweetService.getContextById(id); 
    }
    
-   @PostMapping("/{id}/repost")
+   @PostMapping("/{id}/repost") //endpoint #7 
    //@ResponseStatus(HttpStatus.CREATED)
    public TweetResponseDto repostTweetById(@PathVariable Long id, @RequestBody Credentials credentials ) {
 	   return tweetService.repostTweetById(id, credentials);

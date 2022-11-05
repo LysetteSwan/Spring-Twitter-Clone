@@ -1,6 +1,6 @@
 package com.cooksys.twitterapi.exceptions;
 
-import lombok.Data;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,7 +10,10 @@ import lombok.Setter;
 @Setter
 public class BadRequestException extends RuntimeException {
 
-    private static final long serialVersionUID = -5369285848471817988L;
+    public BadRequestException(String string) {
+		// TODO Auto-generated constructor stub
+	}
+	private static final long serialVersionUID = -5369285848471817988L;
     private String message;
 
 }

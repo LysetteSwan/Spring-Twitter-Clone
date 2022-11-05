@@ -1,6 +1,6 @@
 package com.cooksys.twitterapi.repositories;
 
-//import com.cooksys.twitterapi.entities.Hashtag;
+
 import com.cooksys.twitterapi.entities.TwitterUser;
 
 import com.cooksys.twitterapi.entities.Credentials;
@@ -14,6 +14,8 @@ import org.springframework.stereotype.Repository;
 public interface UserRepository extends JpaRepository<TwitterUser, Long> {
 
 Optional<TwitterUser>findUserByCredentials(Credentials credentials); 
+
+Optional<TwitterUser> findByCredentialsUsername(String username);
 }
 
 

@@ -17,8 +17,6 @@ public interface TweetService {
 	ResponseEntity<List<UserResponseDto>> getLikes(Long id);
 
 	ResponseEntity<List<TweetResponseDto>> replyTweet(TweetRequestDto tweet, Long id);
-
-	ResponseEntity<List<TweetResponseDto>> getTweet(Long id);
 	
 	List<TweetResponseDto> getCurrentTweets();
 
@@ -31,5 +29,8 @@ public interface TweetService {
 	TweetResponseDto deleteTweetbyId(Long id, Credentials credentials);
 
     ResponseEntity<List<TweetResponseDto>> getTweetReplies(Long id);
+
+	TweetResponseDto getTweetById(Long id);
+
 
 }

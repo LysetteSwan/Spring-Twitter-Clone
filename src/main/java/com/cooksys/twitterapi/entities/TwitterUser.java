@@ -4,7 +4,6 @@ import lombok.Data;
 
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
-//import org.springframework.boot.autoconfigure.ldap.embedded.EmbeddedLdapProperties.Credential;
 //import com.cooksys.twitterapi.entities.Credentials;
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -49,5 +48,21 @@ public class TwitterUser {
     @JoinTable(name = "followers_following") 
     private List<TwitterUser> following;
 
+    
+    public void addFollowing(TwitterUser following) {
+        this.following.add(following);
+        following.getFollowers().add(this);
+    }
+    
+    
+    @Override
+    public String toString() {
+        return this.getCredentials().getUsername();
+       
+       
+    }
+
+
+	
 
 }
